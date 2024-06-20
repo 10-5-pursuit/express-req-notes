@@ -5,10 +5,12 @@ const app = express()
 
 
 // Route for Home page
+// localhost:4001/
 app.get('/', (req, res) => {
     res.send('Welcome to my App.')
 })
 
+// localhost:4001/colors
 app.get('/colors', (req, res) => {
     res.send(colors)
 })
@@ -16,6 +18,7 @@ app.get('/colors', (req, res) => {
 
 // random colors -- does the order of our routes matter?!
 // Yes, order matters. Since the path starts with '/colors/' it has to come before '/colors/:index' bc the :index denotes a dynamic parameter that is subject to change.
+// localhost:4001/colors/random
 app.get('/colors/random', (req, res) => {
     const randomNum = Math.floor(Math.random() * colors.length)
     res.send(colors[randomNum])
@@ -24,6 +27,7 @@ app.get('/colors/random', (req, res) => {
 
 // req.params is an object that holds ALL of the dynamic pieces of our route: (parameters)
 // Inside the object, the parameters are the keys, where the values are what we pass into the URL, example: localhost:4001/colors/1 <-- "1" is the parameter
+// Example: localhost:4001/colors/1
 app.get('/colors/:index', (req, res) => {
     const { index } = req.params
     if(colors[index]){
@@ -33,7 +37,7 @@ app.get('/colors/:index', (req, res) => {
     }
 })
 
-
+// localhost:4001/hello/carlos/pizza
 app.get('/hello/:user/:food', (req, res) => {
     const { user, food } = req.params
     res.send(`My name is ${user}, my fav food is ${food}`)
@@ -41,13 +45,15 @@ app.get('/hello/:user/:food', (req, res) => {
 
 
 // Looking ahead to using a database
+// Dummy route, will not work.
+// localhost:4001/pokemon/16
 app.get('/pokemon/:id', async (req, res) => {
     // Use the ID to search the database for a single pokemon that has that ID, get their info and send it back to the client
     const { id } = req.params
 
     // getSinglePokemon comes from another file that holds our functions that interact w the database
-    const singlePokemon = await getSinglePokemon(id)
-    res.json(singlePokemon)
+    // const singlePokemon = await getSinglePokemon(id)
+    // res.json(singlePokemon)
 })
 
 
@@ -71,6 +77,7 @@ app.get('/calculator/:operator', (req, res) => {
     }
 })
 
+// localhost:4001/countdown/5
 app.get('/countdown/:num', (req, res) => {
     const { num } = req.params
     if(Number(num) === 0){
