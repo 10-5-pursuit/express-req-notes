@@ -27,7 +27,6 @@ app.get('/colors/random', (req, res) => {
 
 // req.params is an object that holds ALL of the dynamic pieces of our route: (parameters)
 // Inside the object, the parameters are the keys, where the values are what we pass into the URL, example: localhost:4001/colors/1 <-- "1" is the parameter
-// Example: localhost:4001/colors/1
 app.get('/colors/:index', (req, res) => {
     const { index } = req.params
     if(colors[index]){
